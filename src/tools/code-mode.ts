@@ -23,6 +23,8 @@ export function registerCodeMode(
 
     const executeTool = createExecuteTool({
         prefix: "icd10",
+        // Verifiable provenance: icd10_execute results carry a _meta.citation.
+        source: { id: "icd10", name: "ICD-10-CM", url: "https://www.cms.gov/medicare/coding-billing/icd-10-codes", license: "U.S. Public Domain" },
         catalog: icd10Catalog,
         apiFetch,
         doNamespace: env.ICD10_CODES_DATA_DO,
