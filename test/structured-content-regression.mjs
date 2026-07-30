@@ -39,7 +39,7 @@ console.log(`${BLUE}ICD-10 Codes Structured Content Regression Tests${RESET}`);
 // Code Mode only server — verify core structure
 const indexContent = readFile('src/index.ts');
 assertContains('src/index.ts', indexContent, 'Icd10CodesDataDO', 'index.ts exports Icd10CodesDataDO');
-assertContains('src/index.ts', indexContent, 'McpAgent', 'index.ts uses McpAgent');
+assertContains('src/index.ts', indexContent, 'StatelessMcpWorker', 'index.ts uses StatelessMcpWorker');
 assertContains('src/index.ts', indexContent, 'registerCodeMode', 'index.ts registers Code Mode');
 assertContains('src/index.ts', indexContent, 'registerQueryData', 'index.ts registers query-data');
 assertContains('src/index.ts', indexContent, 'registerGetSchema', 'index.ts registers get-schema');
