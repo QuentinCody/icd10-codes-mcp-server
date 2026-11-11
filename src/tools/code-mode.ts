@@ -14,12 +14,18 @@ export function registerCodeMode(
     env: CodeModeEnv,
 ): void {
     const apiFetch = createIcd10ApiFetch();
+    const registrar = { tool: (...args: unknown[]) => {
+        const [name, ...rest] = args;
+        // SAFETY: shared factory provides SDK arguments; only the alias changes.
+        const register = server.tool.bind(server) as (...values: unknown[]) => void;
+        register(name, ...rest); register(`mcp_${String(name)}`, ...rest);
+    } };
 
     const searchTool = createSearchTool({
         prefix: "icd10",
         catalog: icd10Catalog,
     });
-    searchTool.register(server as unknown as { tool: (...args: unknown[]) => void });
+    searchTool.register(registrar);
 
     const executeTool = createExecuteTool({
         prefix: "icd10",
@@ -27,8 +33,11 @@ export function registerCodeMode(
         source: { id: "icd10", name: "ICD-10-CM", url: "https://www.cms.gov/medicare/coding-billing/icd-10-codes", license: "U.S. Public Domain" },
         catalog: icd10Catalog,
         apiFetch,
+        maxInlineBytes: 30 * 1024,
+        stagingThreshold: 30 * 1024,
+        timeout: 60000,
         doNamespace: env.ICD10_CODES_DATA_DO,
         loader: env.CODE_MODE_LOADER,
     });
-    executeTool.register(server as unknown as { tool: (...args: unknown[]) => void });
+    executeTool.register(registrar);
 }

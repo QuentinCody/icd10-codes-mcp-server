@@ -9,8 +9,8 @@ interface QueryEnv {
 export function registerQueryData(server: McpServer, env?: QueryEnv): void {
     const handler = createQueryDataHandler("ICD10_CODES_DATA_DO", "icd10");
 
-    server.registerTool(
-        "icd10_query_data",
+    for (const name of ["icd10_query_data", "mcp_icd10_query_data"]) server.registerTool(
+        name,
         {
             title: "Query Staged ICD-10 Data",
             description:

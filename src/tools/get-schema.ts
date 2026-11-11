@@ -9,8 +9,8 @@ interface SchemaEnv {
 export function registerGetSchema(server: McpServer, env?: SchemaEnv): void {
     const handler = createGetSchemaHandler("ICD10_CODES_DATA_DO", "icd10");
 
-    server.registerTool(
-        "icd10_get_schema",
+    for (const name of ["icd10_get_schema", "mcp_icd10_get_schema"]) server.registerTool(
+        name,
         {
             title: "Get Staged Data Schema",
             description:

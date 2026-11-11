@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software in your work, please cite it. Citation is requested, not required."
+type: software
+title: "icd10-codes-mcp-server"
+abstract: "Model Context Protocol server for ICD-10-CM (NLM Clinical Tables)."
+authors:
+  - family-names: Cody
+    given-names: Quentin
+repository-code: "https://github.com/QuentinCody/icd10-codes-mcp-server"
+license: Apache-2.0
